@@ -258,6 +258,11 @@ CUSTOM_LOCALES += \
     cy_GB \
     fur_IT
 
+# LMOFreeform
+PRODUCT_PACKAGES += \
+    LMOFreeform \
+    LMOFreeformSidebar
+
 # Certification
 $(call inherit-product-if-exists, vendor/certification/config.mk)
 
