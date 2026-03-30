@@ -23,7 +23,14 @@ SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/sha256sum
 $(GENESIS_TARGET_PACKAGE): $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(GENESIS_TARGET_PACKAGE)
 	$(hide) $(SHA256) $(GENESIS_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(GENESIS_TARGET_PACKAGE).sha256sum
-	@echo "Package Complete: $(GENESIS_TARGET_PACKAGE)" >&2
+	echo -e "${CL_BLD}${CL_GRN}================================================================================${CL_RST}" >&2
+	echo -e "" >&2
+	echo -e "${CL_BLD}${CL_WHT}Package:${CL_RST}  ${CL_BLD}${CL_YEL}$(notdir $(GENESIS_TARGET_PACKAGE))${CL_RST}" >&2
+	echo -e "${CL_BLD}${CL_WHT}Location:${CL_RST} ${CL_BLD}${CL_BLU}$(dir $(GENESIS_TARGET_PACKAGE))${CL_RST}" >&2
+	echo -e "${CL_BLD}${CL_WHT}Size:${CL_RST}     ${CL_BLD}${CL_YEL}$(shell du -h $(GENESIS_TARGET_PACKAGE) | cut -f1)${CL_RST}" >&2
+	echo -e "${CL_BLD}${CL_WHT}Finished At:${CL_RST} ${CL_BLD}${CL_MAG}$(shell date '+%Y-%m-%d %H:%M:%S')${CL_RST}" >&2
+	echo -e "" >&2
+	echo -e "${CL_BLD}${CL_GRN}=============================================================================${CL_RST}" >&2
 
 .PHONY: genesis
 genesis: $(GENESIS_TARGET_PACKAGE) $(DEFAULT_GOAL)
